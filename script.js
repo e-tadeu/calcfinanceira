@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const tipoJuros = document.querySelector('input[name="tipoJuros"]:checked').value;
     const periodo = parseInt(document.getElementById('periodo').value);
 
-    const juros = (tipoJuros === "anual" || tipoJuros === "selic" || tipoJuros === "cdi")
+    /*const juros = (tipoJuros === "anual" || tipoJuros === "selic" || tipoJuros === "cdi")
       ? Math.pow(1 + jurosInput, 1 / 12) - 1
       : jurosInput;
 
@@ -95,7 +95,26 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       patrimonio.push(acumulado);
       aportesSemJuros.push(totalAportado);
+    }*/
+
+    let patrimonio = [];
+    let aportesSemJuros = [];
+    let acumulado = capital;
+    let totalAportado = capital;
+
+    // Usar juros ANUAL e aporte ANUAL se tipo for anual, selic ou cdi
+    const usarTaxaAnual = (tipoJuros === "anual" || tipoJuros === "selic" || tipoJuros === "cdi");
+    const juros = usarTaxaAnual ? jurosInput : jurosInput; // já está em base correta
+
+    for (let t = 0; t <= periodo; t++) {
+      if (t > 0) {
+        acumulado = acumulado * (1 + juros) + aporte;
+        totalAportado += aporte;
+      }
+      patrimonio.push(acumulado);
+      aportesSemJuros.push(totalAportado);
     }
+
 
     const hoje = new Date();
     let labelsX = [];
