@@ -114,8 +114,8 @@ document.addEventListener("DOMContentLoaded", () => {
       patrimonio.push(acumulado);
       aportesSemJuros.push(totalAportado);
     }
-
     
+
     const hoje = new Date();
     let labelsX = [];
 
