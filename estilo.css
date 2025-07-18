@@ -54,9 +54,17 @@ button:hover {
   background: #219150;
 }
 
-#resultado p {
+/*#resultado p {
   font-size: 1.1em;
   margin: 10px 0;
+}*/
+
+#resultado {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  margin-top: 10px;
 }
 
 #grafico {

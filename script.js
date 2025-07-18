@@ -18,6 +18,31 @@ document.addEventListener("DOMContentLoaded", () => {
       percentualCDIInput.disabled = true;
     }
   }
+  function resetResultados() {
+    document.getElementById('valorFinal').innerText = '';
+    document.getElementById('totalAportado').innerText = '';
+    const graficoDiv = document.getElementById('grafico');
+    if (graficoDiv) {
+      graficoDiv.innerHTML = ''; // limpa o gráfico
+    }
+  }
+
+  // Campos que disparam o reset
+  const camposParaReset = [
+    'capital', 'aporte', 'juros', 'periodo', 'percentualCDI'
+  ];
+
+  camposParaReset.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.addEventListener('input', resetResultados);
+    }
+  });
+
+  // Radios (tipo de juros)
+  tipoJurosRadios.forEach(radio => {
+    radio.addEventListener('change', resetResultados);
+  });
 
   // Busca SELIC anual (série 1178)
   async function fetchTaxaSelic() {
@@ -78,25 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const jurosInput = parseFloat(document.getElementById('juros').value) / 100;
     const tipoJuros = document.querySelector('input[name="tipoJuros"]:checked').value;
     const periodo = parseInt(document.getElementById('periodo').value);
-
-    /*const juros = (tipoJuros === "anual" || tipoJuros === "selic" || tipoJuros === "cdi")
-      ? Math.pow(1 + jurosInput, 1 / 12) - 1
-      : jurosInput;
-
-    let patrimonio = [];
-    let aportesSemJuros = [];
-    let acumulado = capital;
-    let totalAportado = capital;
-
-    for (let t = 0; t <= periodo; t++) {
-      if (t > 0) {
-        acumulado = acumulado * (1 + juros) + aporte;
-        totalAportado += aporte;
-      }
-      patrimonio.push(acumulado);
-      aportesSemJuros.push(totalAportado);
-    }*/
-    
+  
     let patrimonio = [];
     let aportesSemJuros = [];
     let acumulado = capital;
@@ -114,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
       patrimonio.push(acumulado);
       aportesSemJuros.push(totalAportado);
     }
-    
+
 
     const hoje = new Date();
     let labelsX = [];
