@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
       patrimonio.push(acumulado);
       aportesSemJuros.push(totalAportado);
     }*/
-
+    
     let patrimonio = [];
     let aportesSemJuros = [];
     let acumulado = capital;
@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
       aportesSemJuros.push(totalAportado);
     }
 
-
+    
     const hoje = new Date();
     let labelsX = [];
 
